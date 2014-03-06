@@ -13,8 +13,9 @@ class WonderApp < Sinatra::Base
 			:type => 'LineString',
 	        :coordinates => [[record.to_point.x, record.to_point.y], [record.from_point.x, record.from_point.y]],
 	        :properties => {
-                # :arrival_time => stay_point.arrival_time,
-                # :departure_time => stay_point.departure_time
+	        	:name => record.name,
+                :estimated_time => record.estimated_time,
+                :ideal_time => record.ideal_time
             }
 		}
   	end
