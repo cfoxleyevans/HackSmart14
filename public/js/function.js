@@ -73,6 +73,7 @@ $(function() {
     addNewCard('Traffic looks great!', 'Traffic');
     addNewCard('Weather is fantastic!', 'Weather');
     addNewCard('No road works affecting your routes!', 'Road Works');
+    addFourSquareCard();
   };
 
   var addNewCard = function(text, type) {
@@ -85,6 +86,20 @@ $(function() {
 
     $(after).after('<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 box"><p>' + text + '</p><span class="type">' + type + '</span></div></div>');
   };
+
+  var addFourSquareCard = function() {
+    $.getJSON('/foursquare.json?lat='+lat+'&long='+lon, function(data) {
+      var places = data.response.groups[0].items;
+
+      var content = '';
+
+      for(var i = 0; i < 3; i++) {
+        content += places[i].venue.name + "<br>";
+      }
+
+      addNewCard(content, 'Places nearby');
+    });
+  }
 
   /********
   LISTENERS
