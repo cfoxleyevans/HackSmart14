@@ -7,4 +7,7 @@ class WonderApp < Sinatra::Base
   helpers Helpers
   set :root, File.dirname(__FILE__)
 
+  after do
+    ActiveRecord::Base.connection.close
+  end
 end 
