@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require_relative 'model/init'
 require_relative 'lib/helpers'
+require_relative 'lib/requests'
 require_relative 'routes/init'
 
 class WonderApp < Sinatra::Base

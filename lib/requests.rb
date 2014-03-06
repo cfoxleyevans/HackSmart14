@@ -1,5 +1,6 @@
 require 'net/http'
 require 'json'
+require 'active_support/all'
 
 class Requests
 	def initialize(args)
@@ -86,12 +87,14 @@ class Requests
 	end
 
 	# 4Square API Routes
-	def self.get_venues_of_type_in_range(latlong, radius, section)
+	def self.get_venues_of_type_in_range(lat, long, parameters={})
 		uri = URI.parse(
-			"https://api.foursquare.com/v2/venues/explore?ll=#{latlong}&" +
+			"https://api.foursquare.com/v2/venues/explore?ll=#{lat},#{long}&" +
 			"client_id=#{@keys[:four_square_client_id]}&client_secret=#{@keys[:four_square_client_secret]}&v=20140301&" +
-			"section=#{section}&radius=#{radius}"
+			"#{parameters.to_query}"
 			)
+
+		p uri
 
 		http = Net::HTTP.new(uri.host, uri.port)
 		http.use_ssl = true
