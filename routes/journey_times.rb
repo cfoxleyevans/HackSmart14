@@ -22,4 +22,27 @@ class WonderApp < Sinatra::Base
 
   	results.to_json
   end
+
+  get '/journey_times/nerarby_routes' do
+    content_type :json
+
+    lat = params[:lat]
+    long = params[:long]
+    radius = params[:radius]
+
+    results = DBHelpers.get_intersecting_journey_time_records(lat, long, radius).map do |record|
+      {
+        :timestamp => record.recorded_timestamp,
+        
+        :coordinates =>  {
+          :from => [record.from_point.y, record.from_point.x], 
+          :to => [record.to_point.y, record.to_point.x]
+        },
+        
+        :difference => record.ideal_time - record.estimated_time,
+        :description => record.name
+      }
+      end
+    results.to_json
+  end
 end
