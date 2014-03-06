@@ -8,7 +8,7 @@ require_relative "geo_helpers"
 
 # DBHelpers.insert_travel_time_data(Requests.get_travel_time_data(nil))
 
-puts GeoHelpers.get_bounding_coords(54.0056373, -2.7849923, 10)
+DBHelpers.get_intersecting_journey_time_records(54.0056373, -2.7849923, 10)
 
 
 

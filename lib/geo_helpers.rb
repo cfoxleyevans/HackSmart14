@@ -9,10 +9,10 @@ class GeoHelpers
     distance = distance.to_f
   
     {
-      :top    => calculate_coords(lat, lon, 45, distance),
-      :right  => calculate_coords(lat, lon, 135, distance),
-      :bottom => calculate_coords(lat, lon, 225, distance),
-      :left   => calculate_coords(lat, lon, 315, distance),
+      :top_right     => calculate_coords(lat, lon, 45, distance),
+      :bottom_right  => calculate_coords(lat, lon, 135, distance),
+      :bottom_left   => calculate_coords(lat, lon, 225, distance),
+      :top_left      => calculate_coords(lat, lon, 315, distance),
     }
   end
    
@@ -36,4 +36,4 @@ module Math
   def self.to_degree radian
     radian * 180/Math::PI
   end
-end  
+end
