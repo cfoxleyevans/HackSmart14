@@ -10,6 +10,8 @@ GEM
       activesupport (= 4.0.3)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activerecord-import (0.4.1)
+      activerecord (>= 3.0)
     activerecord-mysqlspatial-adapter (0.4.1)
       mysql (>= 2.8.1)
       rgeo-activerecord (~> 0.4.3)
@@ -49,6 +51,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  activerecord-import
   activerecord-mysqlspatial-adapter
   mysql2
   rack

@@ -1,5 +1,6 @@
 require_relative '../model/init'
 require 'active_support/all'
+require 'activerecord-import'
 
 class DBHelpers
   def initialize(args)
@@ -9,9 +10,11 @@ class DBHelpers
   def self.insert_travel_time_data(data)
     JourneyTime.destroy_all
 
+    records = []
+
     data.each do |record|
       
-      JourneyTime.create(
+      records << JourneyTime.new(
           id: record['id'],
           timestamp: record['timestamp_readable'].to_datetime,
           recorded_timestamp: record['recordedtime'].to_datetime,
@@ -25,6 +28,8 @@ class DBHelpers
           direction: record['direction']
         )
     end
+
+    JourneyTime.import records
   end
 end
 
