@@ -70,13 +70,11 @@ $(function() {
   ***********/
 
   var renderCards = function() {
-    addNewCard('Traffic looks great!', 'Traffic');
-    addNewCard('Weather is fantastic!', 'Weather');
-    addNewCard('No road works affecting your routes!', 'Road Works');
     addFourSquareCard();
+    addTrafficCard();
   };
 
-  var addNewCard = function(text, type) {
+  var addNewCard = function(html) {
     var after;
     if ($('#card').length > 0) {
       after = $('div[id=card]').last();
@@ -84,22 +82,40 @@ $(function() {
       after = $('#map_wrapper');
     }
 
-    $(after).after('<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 box"><p>' + text + '</p><span class="type">' + type + '</span></div></div>');
+    $(after).after(html);
   };
 
   var addFourSquareCard = function() {
-    $.getJSON('/foursquare.json?lat='+lat+'&long='+lon, function(data) {
+    var url = '/foursquare.json?lat=' + lat + '&long=' + lon
+
+    $.getJSON(url, function(data) {
       var places = data.response.groups[0].items;
+      var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2>Places of interest nearby</h2><ul>'
 
-      var content = '';
-
-      for(var i = 0; i < 3; i++) {
-        content += places[i].venue.name + "<br>";
+      for(var i = 0; i < 5; i++) {
+        content += '<li>' + places[i].venue.name + '</li>';
       }
 
-      addNewCard(content, 'Places nearby');
+      content += '</ul><span class="type">Places Nearby</span></div></div>';
+
+      addNewCard(content);
     });
-  }
+  };
+
+  var addTrafficCard = function() {
+    var url = '/journey_times/nerarby_routes?lat=' + lat + '&long=' + lon + '&radius=10'
+    $.getJSON(url, function(data) {
+      var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2><b>' + data.length + '</b> traffic events nearby</h2><ul>'
+      
+      for(var i = 0; i < data.length; i++) {
+        content += '<li>' + data[i].description + '</li>';
+      };
+
+      content += '</ul><span class="type">Traffic</span></div></div>';
+
+      addNewCard(content);
+    });
+  };
 
   /********
   LISTENERS
