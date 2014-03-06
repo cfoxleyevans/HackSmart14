@@ -43,7 +43,7 @@ $(function() {
 
   // Create Leaflet Map centered at user's location
   var initLeafletMap = function(lat, lon) {
-    var map = L.map('map').setView([lat, lon], 15);
+    var map = L.map('map').setView([lat, lon], 14);
 
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18
