@@ -12,9 +12,9 @@ GEM
     activerecord-deprecated_finders (1.0.3)
     activerecord-import (0.4.1)
       activerecord (>= 3.0)
-    activerecord-mysqlspatial-adapter (0.4.1)
-      mysql (>= 2.8.1)
-      rgeo-activerecord (~> 0.4.3)
+    activerecord-mysql2spatial-adapter (0.4.3)
+      mysql2 (>= 0.2.13)
+      rgeo-activerecord (~> 0.4.5)
     activesupport (4.0.3)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -27,7 +27,6 @@ GEM
     i18n (0.6.9)
     minitest (4.7.5)
     multi_json (1.9.0)
-    mysql (2.9.1)
     mysql2 (0.3.15)
     rack (1.5.2)
     rack-protection (1.5.2)
@@ -52,7 +51,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   activerecord-import
-  activerecord-mysqlspatial-adapter
+  activerecord-mysql2spatial-adapter
   mysql2
   rack
   sinatra

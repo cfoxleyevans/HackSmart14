@@ -13,7 +13,7 @@ ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 config = read_config()
 ActiveRecord::Base.establish_connection(
-  :adapter => "mysqlspatial",
+  :adapter => "mysql2spatial",
   :host => config['host'],
   :username => config['username'],
   :password => config['password'],
