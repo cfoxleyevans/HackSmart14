@@ -51,9 +51,7 @@ $(function() {
   var initLeafletMap = function(lat, lon) {
     map = L.map('map').setView([lat, lon], 14);
 
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18
-    }).addTo(map);
+    L.mapbox.tileLayer('alexnorton.h2hfjmmo', {detectRetina: true}).addTo(map);
 
     L.marker([lat, lon], { 
       bounceOnAdd: true
