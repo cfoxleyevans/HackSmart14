@@ -31,7 +31,7 @@ class DBHelpers
   def self.get_intersecting_journey_time_records(lat, long, radius)
     bounding_box_coords = GeoHelpers.get_bounding_coords(lat, long, radius)
 
-    p JourneyTime.find_by_sql("SELECT * FROM `journey_times` WHERE MBRIntersects(GeomFromText('POLYGON((#{bounding_box_coords[:top_right][1]} #{bounding_box_coords[:top_right][0]}, #{bounding_box_coords[:top_left][1]} #{bounding_box_coords[:top_left][0]}, #{bounding_box_coords[:bottom_left][1]} #{bounding_box_coords[:bottom_left][0]}, #{bounding_box_coords[:bottom_right][1]} #{bounding_box_coords[:bottom_right][0]}, #{bounding_box_coords[:top_right][1]} #{bounding_box_coords[:top_right][0]}))'),
+    JourneyTime.find_by_sql("SELECT * FROM `journey_times` WHERE MBRIntersects(GeomFromText('POLYGON((#{bounding_box_coords[:top_right][1]} #{bounding_box_coords[:top_right][0]}, #{bounding_box_coords[:top_left][1]} #{bounding_box_coords[:top_left][0]}, #{bounding_box_coords[:bottom_left][1]} #{bounding_box_coords[:bottom_left][0]}, #{bounding_box_coords[:bottom_right][1]} #{bounding_box_coords[:bottom_right][0]}, #{bounding_box_coords[:top_right][1]} #{bounding_box_coords[:top_right][0]}))'),
       LINESTRING(to_point, from_point)) and id in (select max(id) from journey_times group by from_point, to_point);")
   end
 end
