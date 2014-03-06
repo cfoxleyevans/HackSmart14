@@ -70,13 +70,12 @@ $(function() {
   ***********/
 
   var renderCards = function() {
-    addNewCard('This is a test 1!');
-    addNewCard('This is a test 2!');
-    addNewCard('This is a test 3!');
-    addNewCard('This is a test 4!');
+    addNewCard('Traffic looks great!', 'Traffic');
+    addNewCard('Weather is fantastic!', 'Weather');
+    addNewCard('No road works affecting your routes!', 'Road Works');
   };
 
-  var addNewCard = function(text) {
+  var addNewCard = function(text, type) {
     var after;
     if ($('#card').length > 0) {
       after = $('div[id=card]').last();
@@ -84,7 +83,7 @@ $(function() {
       after = $('#map_wrapper');
     }
 
-    $(after).after('<div class="row" id="card"><div class="col-md-offset-4 col-md-4 box"><p>' + text + '</p></div></div>');
+    $(after).after('<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 box"><p>' + text + '</p><span class="type">' + type + '</span></div></div>');
   };
 
   /********
