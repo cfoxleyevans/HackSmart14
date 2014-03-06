@@ -9,9 +9,8 @@ class DBHelpers
   def self.insert_travel_time_data(data)
     JourneyTime.destroy_all
 
-
-
     data.each do |record|
+      
       JourneyTime.create(
           id: record['id'],
           timestamp: record['timestamp_readable'].to_datetime,
@@ -27,7 +26,6 @@ class DBHelpers
         )
     end
   end
-
 end
 
 
