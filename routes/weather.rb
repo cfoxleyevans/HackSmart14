@@ -25,6 +25,8 @@ class WonderApp < Sinatra::Base
 		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 		response = http.get(uri.request_uri)
 
-		JSON.parse(response.body)
+		data = JSON.parse(response.body)
+
+    data['minutely'].to_json
 	end
 end
