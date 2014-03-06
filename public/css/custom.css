@@ -7,7 +7,7 @@
 body {
   background: #2c3e50;
   color: #ecf0f1;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 p {
@@ -22,6 +22,7 @@ p {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px; 
+  margin-top: 10px;
 }
 
 #map { 
@@ -41,4 +42,8 @@ p {
 #map_btn {
   display: none;
   cursor: pointer;
+}
+
+.leaflet-control-attribution a {
+  display: none;
 }
