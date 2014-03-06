@@ -46,7 +46,7 @@ class Requests
 		json = parse_api_response(response.body)
 	end
 
-	def get_current_roadwork_data(number_of_records)
+	def self.get_current_roadwork_data(number_of_records='')
 		keys = {'x-api-key' => @keys[:ss_api_key]}
 		uri = URI.parse("http://smartstreets.sensetecnic.com/wotkit/api/sensors/42602/data?beforeE=#{number_of_records}")
 		http = Net::HTTP.new(uri.host, uri.port)

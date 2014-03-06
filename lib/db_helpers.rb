@@ -1,4 +1,5 @@
 require_relative '../model/init'
+require_relative 'requests'
 require 'active_support/all'
 
 class DBHelpers
@@ -26,6 +27,35 @@ class DBHelpers
         )
     end
 
+  end
+
+  def self.insert_roadwork_data
+    Roadwork.delete_all
+
+    data = Requests.get_current_roadwork_data
+
+    data.each do |record|
+      roadwork = Roadwork.new
+
+      roadwork.id = record['id']
+      roadwork.timestamp = record['timestamp_readable'].to_datetime
+      roadwork.start_time = (if record['starttime'] then record['starttime'].to_datetime end)
+      roadwork.end_time = (if record['endtime'] then record['endtime'].to_datetime end)
+      roadwork.recorded_time = record['recordedtime']
+      roadwork.direction = record['direction']
+      roadwork.point = "POINT(#{record['lng']} #{record['lat']})"
+      roadwork.line = "LINESTRING(#{record['lngfrom']} #{record['latfrom']}, #{record['lngto']} #{record['latto']})"
+      roadwork.delay_time = record['delaytime']
+      roadwork.road_maintenance_type = record['roadMaintenanceType']
+      roadwork.restricted_lanes = record['restrictedlanes']
+      roadwork.subject_type_of_works = record['subjectTypeOfWorks']
+      roadwork.operational_lanes = record['value']
+      roadwork.occurence_probability = record['occurrence']
+      roadwork.comment =  record['comment']
+      roadwork.impact = record['impact']
+      
+      roadwork.save
+    end
   end
 
   def self.get_intersecting_journey_time_records(lat, long, radius)
