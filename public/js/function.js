@@ -1,9 +1,5 @@
 $(function() {
-  /******
-  GLOBALS
-  ******/
-
-  var map;
+  var lat, lon, map;
 
   /*******************
   LOCATION AND MAPPING
@@ -20,8 +16,8 @@ $(function() {
 
   // Use GoogleMaps API to get nearest address for lat/long
   var getAddress = function(position) {
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
 
     initLeafletMap(lat, lon);
 
@@ -64,6 +60,7 @@ $(function() {
     }).addTo(map);
 
     $('#map_btn').show();
+    $('#map').css('border-style', 'solid');
   };
 
   getLocation();
@@ -76,14 +73,14 @@ $(function() {
   $('#map_btn').click(function(){
     var height = $('#map').height();
 
-    if (height > 180) {
-      $('#map').animate({height:180},200);
-      $('#map_btn_wrapper').animate({"margin-top":170},200);
+    if (height > 170) {
+      $('#map').animate({height:170},200);
+      $('#map_btn_wrapper').animate({"margin-top":160},200);
       $('#map_btn').addClass('glyphicon-chevron-down');
       $('#map_btn').removeClass('glyphicon-chevron-up');
     } else {
-      $('#map').animate({height:360},200);
-      $('#map_btn_wrapper').animate({"margin-top":350},200);
+      $('#map').animate({height:350},200);
+      $('#map_btn_wrapper').animate({"margin-top":340},200);
       $('#map_btn').addClass('glyphicon-chevron-up');
       $('#map_btn').removeClass('glyphicon-chevron-down');
     }
