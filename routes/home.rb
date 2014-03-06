@@ -1,5 +1,5 @@
 class WonderApp < Sinatra::Base
   get '/' do
-    "Hello!"
+    erb :home
   end
 end

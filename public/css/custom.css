@@ -1,0 +1,33 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+* {
+  font-weight: 300 !important;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background: #2c3e50;
+  color: #ecf0f1;
+  margin-top: 20px;
+}
+
+p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.box {
+  padding: 8px 16px;
+  background: #FFF;
+  color: #2c3e50;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+}
+
+#map { 
+  margin-top: 10px;
+  height: 360px; 
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+}
