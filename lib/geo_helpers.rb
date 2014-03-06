@@ -26,19 +26,14 @@ class GeoHelpers
     
     [Math.to_degree(max_lat_rads), Math.to_degree(max_lon_rads)]
   end
+end
 
-class Math
-  def initialize(args)
-    
-  end
-
-  def to_rad degree
+module Math
+  def self.to_rad degree
     degree * Math::PI / 180
   end
     
-  def to_degree radian
+  def self.to_degree radian
     radian * 180/Math::PI
   end
-end
-end
-  
+end  
