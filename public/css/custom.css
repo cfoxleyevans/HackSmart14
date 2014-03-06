@@ -22,10 +22,18 @@ p {
   border-radius:3px;
   margin-top: 10px;
   box-shadow: 0 1px 2px #aaa;
-  position: relative; 
 }
 
-.box .type {
+.card {
+  background: #FFF;
+  color: #2c3e50;
+  border-radius:3px;
+  margin-top: 10px;
+  box-shadow: 0 1px 2px #aaa;
+  position: relative; 
+  padding: 0;
+}
+.card .type {
   position: absolute; 
   right: 0; 
   bottom: 0;
@@ -33,6 +41,28 @@ p {
   padding: 0.5rem;
   color: #7f8c8d;
 }
+.card h2 {
+  padding: 15px 10px 10px 15px;
+  font-size: 20px;
+  margin: 0;
+}
+.card ul {
+  border-top: 1px solid #bdc3c7;
+  border-bottom: 1px solid #bdc3c7;
+  background: #ecf0f1;
+  margin: 5px 0;
+  list-style-type: none;
+  margin-bottom: 30px;
+  padding: 0;
+}
+.card ul li {
+  font-size: 14px;
+  padding: 4px 15px;
+  border-bottom: 1px solid #bdc3c7;
+}
+  .card ul li:last-child {
+    border: none;
+  }
 
 #map { 
   margin-top: 10px;
