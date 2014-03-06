@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.15)
 # Database: wonder
-# Generation Time: 2014-03-06 15:02:09 +0000
+# Generation Time: 2014-03-06 19:54:58 +0000
 # ************************************************************
 
 
@@ -32,13 +32,14 @@ CREATE TABLE `journey_times` (
   `point` point NOT NULL,
   `from_point` point NOT NULL,
   `to_point` point NOT NULL,
-  `ideal_time` int(11) NOT NULL,
-  `historic_time` int(11) NOT NULL,
+  `ideal_time` int(11) DEFAULT NULL,
+  `historic_time` int(11) DEFAULT NULL,
   `estimated_time` int(11) NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
   `direction` varchar(20) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  SPATIAL KEY `point_index` (`point`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 
