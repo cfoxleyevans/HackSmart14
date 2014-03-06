@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.15)
 # Database: wonder
-# Generation Time: 2014-03-06 13:50:08 +0000
+# Generation Time: 2014-03-06 15:02:09 +0000
 # ************************************************************
 
 
@@ -26,17 +26,17 @@
 DROP TABLE IF EXISTS `journey_times`;
 
 CREATE TABLE `journey_times` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `timestamp` datetime DEFAULT NULL,
-  `recorded_timestamp` datetime DEFAULT NULL,
-  `point` point DEFAULT NULL,
-  `from_point` point DEFAULT NULL,
-  `to_point` point DEFAULT NULL,
-  `ideal_time` int(11) DEFAULT NULL,
-  `historic_time` int(11) DEFAULT NULL,
-  `estimated_time` int(11) DEFAULT NULL,
-  `name` int(11) DEFAULT NULL,
-  `direction` varchar(20) DEFAULT NULL,
+  `id` int(11) unsigned NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `recorded_timestamp` datetime NOT NULL,
+  `point` point NOT NULL,
+  `from_point` point NOT NULL,
+  `to_point` point NOT NULL,
+  `ideal_time` int(11) NOT NULL,
+  `historic_time` int(11) NOT NULL,
+  `estimated_time` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `direction` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
