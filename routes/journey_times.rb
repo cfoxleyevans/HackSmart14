@@ -40,7 +40,7 @@ class WonderApp < Sinatra::Base
         },
         
         :difference => record.ideal_time - record.estimated_time,
-        :description => record.name
+        :description => Helpers.shorten_description(record.name)
       }
       end
     results.to_json
