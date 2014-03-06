@@ -30,7 +30,27 @@ class WonderApp < Sinatra::Base
     long = params[:long]
     radius = params[:radius]
 
+    
+
     results = DBHelpers.get_intersecting_journey_time_records(lat, long, radius).map do |record|
+      ratio = record.ideal_time / record.estimated_time
+
+      if(ratio > 1.5)
+        severity = "severe"
+      end
+      
+      if(ratio > 1.1 or ratio < 1.5)
+        severity = "moderate"
+      end
+      
+      if(ratio < 1.1 or ratio > 0.9)
+        severity = "normal"
+      end
+
+      if (ratio < 0.9)
+        severity = "clear"
+      end 
+
       {
         :timestamp => record.recorded_timestamp,
         
@@ -40,9 +60,15 @@ class WonderApp < Sinatra::Base
         },
         
         :difference => record.ideal_time - record.estimated_time,
+        :severity => severity,
         :description => Helpers.shorten_description(record.name)
       }
       end
     results.to_json
   end
 end
+
+
+
+
+
