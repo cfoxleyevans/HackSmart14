@@ -59,9 +59,33 @@ $(function() {
 
     $('#map_btn').show();
     $('#map').css('border-style', 'solid');
+
+    renderCards();
   };
 
   getLocation();
+
+  /***********
+  ADDING CARDS
+  ***********/
+
+  var renderCards = function() {
+    addNewCard('This is a test 1!');
+    addNewCard('This is a test 2!');
+    addNewCard('This is a test 3!');
+    addNewCard('This is a test 4!');
+  };
+
+  var addNewCard = function(text) {
+    var after;
+    if ($('#card').length > 0) {
+      after = $('div[id=card]').last();
+    } else {
+      after = $('#map_wrapper');
+    }
+
+    $(after).after('<div class="row" id="card"><div class="col-md-offset-4 col-md-4 box"><p>' + text + '</p></div></div>');
+  };
 
   /********
   LISTENERS
@@ -72,15 +96,17 @@ $(function() {
     var height = $('#map').height();
 
     if (height > 170) {
-      $('#map').animate({height:170},200);
-      $('#map_btn_wrapper').animate({"margin-top":160},200);
+      $('#map').css('height', '170px');
+      $('#map_btn_wrapper').css('margin-top', '150px');
       $('#map_btn').addClass('glyphicon-chevron-down');
       $('#map_btn').removeClass('glyphicon-chevron-up');
+      map.invalidateSize();
     } else {
-      $('#map').animate({height:350},200);
-      $('#map_btn_wrapper').animate({"margin-top":340},200);
+      $('#map').css('height', '350px');
+      $('#map_btn_wrapper').css('margin-top', '330px');
       $('#map_btn').addClass('glyphicon-chevron-up');
       $('#map_btn').removeClass('glyphicon-chevron-down');
+      map.invalidateSize();
     }
   });
 });

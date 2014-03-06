@@ -7,7 +7,7 @@
 body {
   background: #2c3e50;
   color: #ecf0f1;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 p {
@@ -16,27 +16,24 @@ p {
 }
 
 .box {
-  padding: 8px 16px;
+  padding:1.5rem;
   background: #FFF;
   color: #2c3e50;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px; 
+  border-radius:3px;
   margin-top: 10px;
+  box-shadow:0 1px 2px #aaa;
 }
 
 #map { 
   margin-top: 10px;
   height: 170px; 
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px; 
+  border-radius:3px;
   border: 5px none #FFF;
 }
 
 #map_btn_wrapper {
-  margin-top: 160px;
-  margin-left: -20px;
+  margin-top: 150px;
+  margin-left: -5px;
 }
 
 #map_btn {
