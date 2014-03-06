@@ -14,12 +14,8 @@ results = DBHelpers.get_intersecting_journey_time_records(54.0056373, -2.7849923
 
 puts "\n"
 
-<<<<<<< HEAD
-#DBHelpers.get_intersecting_journey_time_records(54.0056373, -2.7849923, 10)
-=======
 results.each do |route|
 	puts "Route ID:#{route.id}"
->>>>>>> FETCH_HEAD
 
 	ratio = route.ideal_time / route.estimated_time
 
