@@ -63,6 +63,17 @@ $(function() {
     renderCards();
   };
 
+  var initFSMap = function(markers) {
+    var fs_map = L.map('fs_map').setView([lat, lon], 14);
+    L.mapbox.tileLayer('alexnorton.h2hfjmmo', {detectRetina: true}).addTo(fs_map);
+
+    $.each(markers, function(index, value) {
+      L.marker(value, { 
+        bounceOnAdd: true
+      }).addTo(fs_map);
+    });
+  };
+
   getLocation();
 
   /***********
@@ -92,26 +103,34 @@ $(function() {
       var places = data.response.groups[0].items;
       var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2>Places of interest nearby</h2><ul>'
 
+      var markers = [];
+
       for(var i = 0; i < 5; i++) {
-        content += '<li>' + places[i].venue.name + '</li>';
+        content += '<li>' + places[i].venue.name + ' (' + places[i].venue.location.distance + 'm)</li>';
+
+        var points = [places[i].venue.location.lat, places[i].venue.location.lng];
+        markers.push(points)
       }
 
-      content += '</ul><span class="type">Places Nearby</span></div></div>';
+      content += '</ul><span class="type">Places Nearby</span><span class="map_link"><span class="glyphicon glyphicon-chevron-down"></span></span></div>';
+
+      content += '<div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10"><div id="fs_map"></div></div></div>';
 
       addNewCard(content);
+      initFSMap(markers);
     });
   };
 
   var addTrafficCard = function() {
     var url = '/journey_times/nerarby_routes?lat=' + lat + '&long=' + lon + '&radius=10'
     $.getJSON(url, function(data) {
-      var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2><b>' + data.length + '</b> traffic events nearby</h2><ul>'
+      var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2><b>' + data.length + '</b> traffic reports nearby</h2><ul>'
       
       for(var i = 0; i < data.length; i++) {
         content += '<li>' + data[i].description + '</li>';
       };
 
-      content += '</ul><span class="type">Traffic</span></div></div>';
+      content += '</ul><span class="type">Traffic</span><span class="map_link"><span class="glyphicon glyphicon-chevron-down"></span></span></div></div>';
 
       addNewCard(content);
     });
@@ -122,7 +141,7 @@ $(function() {
   ********/
 
   // Animate expanding the map
-  $('#map_btn').click(function(){
+  $('#map_btn').click(function() {
     var height = $('#map').height();
 
     if (height > 170) {
