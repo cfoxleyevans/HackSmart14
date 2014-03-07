@@ -16,8 +16,8 @@ $(function() {
 
   // Use GoogleMaps API to get nearest address for lat/long
   var getAddress = function(position) {
-    lat = 51.7504163 //position.coords.latitude;
-    lon = -1.2475878//position.coords.longitude;
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
 
     initLeafletMap(lat, lon);
 
