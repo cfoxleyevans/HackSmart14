@@ -61,6 +61,7 @@ class WonderApp < Sinatra::Base
         
         :difference => record.ideal_time - record.estimated_time,
         :severity => severity,
+        :ratio => ratio.to_f,
         :description => Helpers.shorten_description(record.name)
       }
       end

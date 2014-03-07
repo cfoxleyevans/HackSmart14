@@ -69,8 +69,28 @@ $(function() {
     var fs_map = L.map('fs_map').setView([lat, lon], 14);
     L.mapbox.tileLayer('alexnorton.h2hfjmmo', {detectRetina: true}).addTo(fs_map);
 
+    var colors = ['red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpuple', 'cadetblue'];
+
+    var icon_lookup = {
+      'Pub': 'beer',
+      'Plaza': 'leaf',
+      'Café': 'coffee',
+      'Fast Food': 'cutlery',
+      'Grocery Store': 'shopping-cart',
+      'Performing Arts': 'pencil',
+      'Theater': 'smile-o'
+    }
+
     $.each(markers, function(index, value) {
-      var marker = L.marker(value.points, { 
+      var color = colors[Math.floor(Math.random() * colors.length)];
+
+      var redMarker = L.AwesomeMarkers.icon({
+        icon: icon_lookup[value.icon],
+        prefix: 'fa',
+        markerColor: color
+      });
+
+      var marker = L.marker(value.points, {icon: redMarker}, { 
         bounceOnAdd: true
       }).addTo(fs_map);
       marker.bindPopup(value.text);
@@ -87,7 +107,6 @@ $(function() {
     addTrafficCard();
     addWeatherCard();
     addFourSquareCard();
-    addMusicCard();
   };
 
   var addNewCard = function(html) {
@@ -110,7 +129,9 @@ $(function() {
         var points = [places[i].venue.location.lat, places[i].venue.location.lng];
         markers.push({
           'points': points,
-          'text' : places[i].venue.name})
+          'text' : places[i].venue.name,
+          'icon': places[i].venue.categories[0].shortName
+        })
       }
 
       content += '</ul><span class="type">Places Nearby</span></div>';
@@ -126,7 +147,13 @@ $(function() {
     var url = '/journey_times/nerarby_routes?lat=' + lat + '&long=' + lon + '&radius=10'
     $.getJSON(url, function(data) {
       var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2><b>' + data.length + '</b> traffic reports nearby</h2><ul>'
-      
+
+      if(data[0] && data[0] > 0) {
+          addMusicCard(data[0].ratio);
+      } else {
+          addMusicCard(1);
+      }
+
       for(var i = 0; i < data.length; i++) {
 
         if(data[i].severity == "clear") {
@@ -166,12 +193,16 @@ $(function() {
     });
   };
 
-  var addMusicCard = function() {
+  var addMusicCard = function(severity) {
       var embed = '<iframe src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:TRACKS" frameborder="0" allowtransparency="true"></iframe>';
 
+      console.log(severity);
+      var value = ((severity - 1) * 5) + 0.5;
+      console.log(value);
+
       $.getJSON('/music/playlist.json', {
-          speed: 1,
-          energy: 1,
+          speed: value,
+          energy: value,
           danceability: 1
       }, function(data) {
 
