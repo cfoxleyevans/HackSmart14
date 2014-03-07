@@ -25,7 +25,7 @@ results.each do |route|
 	if(ratio < 0.9)
 		puts " Fast Route"
 	end
-	if(ratio > 0.9 or route_ratio < 1.1)
+	if(ratio > 0.9 or route < 1.1)
 		puts " Normal Route"
 	end
 end
