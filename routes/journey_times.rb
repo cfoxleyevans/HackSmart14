@@ -35,19 +35,19 @@ class WonderApp < Sinatra::Base
     results = DBHelpers.get_intersecting_journey_time_records(lat, long, radius).map do |record|
       ratio = record.ideal_time / record.estimated_time
 
-      if(ratio > 1.5)
+      if(ratio > 1.2)
         severity = "severe"
       end
       
-      if(ratio > 1.1 or ratio < 1.5)
+      if(ratio > 1.1 and ratio <= 1.2)
         severity = "moderate"
       end
       
-      if(ratio < 1.1 or ratio > 0.9)
+      if(ratio > 0.9 and ratio <= 1.1)
         severity = "normal"
       end
 
-      if (ratio < 0.9)
+      if (ratio <= 0.9)
         severity = "clear"
       end 
 

@@ -16,8 +16,10 @@ $(function() {
 
   // Use GoogleMaps API to get nearest address for lat/long
   var getAddress = function(position) {
-    lat = position.coords.latitude;
-    lon = position.coords.longitude;
+    lat =position.coords.latitude;
+    lon =position.coords.longitude;
+
+
 
     initLeafletMap(lat, lon);
 
@@ -184,7 +186,7 @@ $(function() {
               });
               var tembed = embed.replace('TRACKS', tracks.join()).replace('PREFEREDTITLE', 'Playlist');
 
-              content += tembed;
+              content += '<ul>' + tembed + '</ul>';
 
               $("#results").html(tembed);
           }
