@@ -2,8 +2,13 @@ require 'active_support/all'
 require 'json'
 
 class WonderApp < Sinatra::Base
+<<<<<<< HEAD
   get '/music/playlist.json' do
     content_type :json
+=======
+  get '/mmmmusic' do
+  content_type :json
+>>>>>>> FETCH_HEAD
 
     parameters = {
         target_tempo: 250
@@ -13,9 +18,14 @@ class WonderApp < Sinatra::Base
 
     uri =  URI.parse(url)
 
+<<<<<<< HEAD
     http = Net::HTTP.new(uri.host, uri.port)
     response = http.get(uri.request_uri)
 
     response.body
   end
+=======
+  response.body
+end
+>>>>>>> FETCH_HEAD
 end
