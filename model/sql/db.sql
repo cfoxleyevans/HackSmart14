@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.15)
 # Database: wonder
-# Generation Time: 2014-03-06 19:54:58 +0000
+# Generation Time: 2014-03-07 01:27:45 +0000
 # ************************************************************
 
 
@@ -39,6 +39,33 @@ CREATE TABLE `journey_times` (
   `direction` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   SPATIAL KEY `point_index` (`point`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table roadworks
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `roadworks`;
+
+CREATE TABLE `roadworks` (
+  `id` int(11) unsigned NOT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  `point` point DEFAULT NULL,
+  `line` linestring DEFAULT NULL,
+  `operational_lanes` int(11) DEFAULT NULL,
+  `restricted_lanes` int(11) DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `comment` text,
+  `impact` text,
+  `delay_time` int(11) DEFAULT NULL,
+  `occurence_probability` text,
+  `road_maintenance_type` text,
+  `subject_type_of_works` text,
+  `recorded_time` datetime DEFAULT NULL,
+  `direction` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
