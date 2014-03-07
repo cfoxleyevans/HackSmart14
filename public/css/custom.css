@@ -97,7 +97,8 @@ p {
 
 #fs_map {
   height: 170px;
-  border-radius:3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
   border: 5px solid #FFF;
   border-top: none;
   margin: 0 5px;
