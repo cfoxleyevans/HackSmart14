@@ -107,6 +107,7 @@ $(function() {
     addTrafficCard();
     addWeatherCard();
     addFourSquareCard();
+    addRoadWorksCard();
   };
 
   var addNewCard = function(html) {
@@ -118,7 +119,7 @@ $(function() {
 
     $.getJSON(url, function(data) {
       var places = data.response.groups[0].items;
-      var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2>Places of interest nearby</h2><ul>'
+      var content = '<div class="row" id="card"><div class="col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10 card"><h2>Places of interest nearby</h2><ul>'
 
       var markers = [];
 
@@ -136,7 +137,7 @@ $(function() {
 
       content += '</ul><span class="type">Places Nearby</span></div>';
 
-      content += '<div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10"><div id="fs_map"></div></div></div>';
+      content += '<div class="col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10"><div id="fs_map"></div></div></div>';
 
       addNewCard(content);
       initFSMap(markers);
@@ -146,7 +147,7 @@ $(function() {
   var addTrafficCard = function() {
     var url = '/journey_times/nerarby_routes?lat=' + lat + '&long=' + lon + '&radius=10'
     $.getJSON(url, function(data) {
-      var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2><b>' + data.length + '</b> traffic reports nearby</h2><ul>'
+      var content = '<div class="row" id="card"><div class="col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10 card"><h2><b>' + data.length + '</b> traffic reports nearby</h2><ul>'
 
       if(data[0] && data[0] > 0) {
           addMusicCard(data[0].ratio);
@@ -169,8 +170,8 @@ $(function() {
           border_colour = "rgb(241, 40, 12)";
         }
         
-        content += '<li style="border-left: 15px solid ' + border_colour + '">' + data[i].description + ' <span style="color: ' + border_colour  + '"> (' + data[i].difference + 's)</li>';
-    };
+        content += '<li style="border-left: 15px solid ' + border_colour + '">' + data[i].description + ' <span style="color: ' + border_colour  + '"> (' + data[i].difference + 's)</span></li>';
+      };
 
       content += '</ul><span class="type">Traffic</span></div></div>';
 
@@ -181,13 +182,40 @@ $(function() {
   var addWeatherCard = function() {
     var url = 'weather/nearby_weather?lat=' + lat + '&long=' + lon
     $.getJSON(url, function(data) {
-      var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2>Local weather</h2><ul>'
+      var content = '<div class="row" id="card"><div class="col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10 card"><h2>Local weather</h2><ul>'
       
       
       content += '<li>Now: ' + data.current_summary + ' - ' + data.current_temp + '&deg;C, feels like ' + data.currently_feels_like + '&deg;C</li>'; 
       content += '<li>Later: ' + data.next_summary + ' - ' + data.next_temp + '&deg;C</li>';
       
       content += '</ul><span class="type">Weather</span></div></div>';
+
+      addNewCard(content);
+    });
+  };
+
+  var addRoadWorksCard = function() {
+    var url = '/roadworks/neraby_roadworks?lat=' + lat + '&long=' + lon + '&radius=10'
+    $.getJSON(url, function(data) {
+      var content = '<div class="row" id="card"><div class="col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10 card"><h2>' + data.length + ' road works nearby</h2><ul>'
+      var border_colour;
+
+      for(var i = 0; i < data.length; i++) {
+        if(data[i].impact == "freeFlow") {
+          border_colour = "rgb(50, 162, 35)";
+        }
+        else if(data[i].impact == "heavy") {
+          border_colour = "rgb(248, 186, 55)";
+        }
+        else if(data[i].impact == "impossible") {
+          border_colour = "rgb(241, 40, 12)";
+        }
+
+        var parts = data[i].comment.split('.');
+        content += '<li style="border-left: 15px solid ' + border_colour + '">' + parts[0] + '</li>';
+      };
+      
+      content += '</ul><span class="type">Road Works</span></div></div>';
 
       addNewCard(content);
     });
@@ -206,7 +234,7 @@ $(function() {
           danceability: 1
       }, function(data) {
 
-          var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card music-card"><h2>Spotify playlist</h2>';
+          var content = '<div class="row" id="card"><div class="col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10 card music-card"><h2>Spotify playlist</h2>';
 
           if ('songs' in data.response) {
               var tracks = []
@@ -231,7 +259,7 @@ $(function() {
   var addPredictionCard = function() {
     var url = '/prediction.json?lat=' + lat + '&long=' + lon + '&radius=10'
     $.getJSON(url, function(data) {
-      var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2 style="margin-bottom:20px;">' + data.description + '</h2><span class="type">Travel Prediction</span></div></div>'
+      var content = '<div class="row" id="card"><div class="col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10 card"><h2 style="margin-bottom:20px;">' + data.description + '</h2><span class="type">Travel Prediction</span></div></div>'
 
       $('#map_wrapper').after(content);
 
