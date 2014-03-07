@@ -64,7 +64,7 @@ $(function() {
   };
 
   var initFSMap = function(markers) {
-    var fs_map = L.map('fs-map').setView([lat, lon], 14);
+    var fs_map = L.map('fs_map').setView([lat, lon], 14);
     L.mapbox.tileLayer('alexnorton.h2hfjmmo', {detectRetina: true}).addTo(fs_map);
 
     $.each(markers, function(index, value) {
@@ -115,7 +115,7 @@ $(function() {
 
       content += '</ul><span class="type">Places Nearby</span><span class="map_link"><span class="glyphicon glyphicon-chevron-down"></span></span></div>';
 
-      content += '<div id="fs-map-toggle" class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10"><div id="fs-map"></div></div></div>';
+      content += '<div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10"><div id="fs_map"></div></div></div>';
 
       addNewCard(content);
       initFSMap(markers);
@@ -130,21 +130,26 @@ $(function() {
       for(var i = 0; i < data.length; i++) {
 
         if(data[i].severity == "clear") {
-            colour = "rgb(26, 140, 216)"; 
+          border_colour = "rgb(26, 140, 216)"; 
         }
         else if(data[i].severity == "normal") {
-          colour = "rgb(50, 162, 35)";
+          border_colour = "rgb(50, 162, 35)";
         }
         else if(data[i].severity == "moderate") {
-          colour = "rgb(248, 186, 55)";
+          border_colour = "rgb(248, 186, 55)";
         }
         else if(data[i].severity == "severe") {
-          colour = "rgb(241, 40, 12)";
+          border_colour = "rgb(241, 40, 12)";
         }
         
+        if(data[i].difference < 0) {
+          difference_colour = "rgb(241, 40, 12)";
+        }
+        else {
+           difference_colour = "rgb(50, 162, 35)";
+        }
 
-
-        content += '<li style="border-left: 15px solid ' + colour + '">' + data[i].description + '</li>';
+        content += '<li style="border-left: 15px solid ' + border_colour + '">' + data[i].description + ' <span style="colour: ' + difference_colour  + '> (' + data[i].difference + ')</li>';
     };
 
       content += '</ul><span class="type">Traffic</span><span class="map_link"><span class="glyphicon glyphicon-chevron-down"></span></span></div></div>';
@@ -189,9 +194,5 @@ $(function() {
       $('#map_btn').removeClass('glyphicon-chevron-down');
       map.invalidateSize();
     }
-  });
-
-  $('#fs-map-toggle').click(function() {
-    console.log("click");
   });
 });
