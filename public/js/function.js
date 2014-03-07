@@ -150,7 +150,7 @@ $(function() {
            difference_colour = "rgb(50, 162, 35)";
         }
 
-        content += '<li style="border-left: 15px solid ' + border_colour + '">' + data[i].description + ' <span style="colour: ' + difference_colour  + '> (' + data[i].difference + ')</li>';
+        content += '<li style="border-left: 15px solid ' + border_colour + '">' + data[i].description + ' <span style="color: ' + difference_colour  + '"> (' + data[i].difference + ')</li>';
     };
 
       content += '</ul><span class="type">Traffic</span><span class="map_link"><span class="glyphicon glyphicon-chevron-down"></span></span></div></div>';
