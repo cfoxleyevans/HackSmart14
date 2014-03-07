@@ -19,8 +19,6 @@ $(function() {
     lat =position.coords.latitude;
     lon =position.coords.longitude;
 
-
-
     initLeafletMap(lat, lon);
 
     var maps_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon +"&sensor=true";
@@ -177,6 +175,7 @@ $(function() {
 
       addNewCard(content);
     });
+    addRoadWorksCard();
   };
 
   var addWeatherCard = function() {
@@ -191,6 +190,7 @@ $(function() {
       content += '</ul><span class="type">Weather</span></div></div>';
 
       addNewCard(content);
+      addTrafficCard();
     });
   };
 
@@ -218,7 +218,9 @@ $(function() {
       content += '</ul><span class="type">Road Works</span></div></div>';
 
       addNewCard(content);
+      addFourSquareCard();
     });
+   
   };
 
   var addMusicCard = function(severity) {
@@ -263,7 +265,7 @@ $(function() {
 
       $('#map_wrapper').after(content);
 
-      renderCards();
+      addWeatherCard();
     });
   };
 
