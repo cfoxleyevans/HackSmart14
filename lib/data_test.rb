@@ -12,5 +12,19 @@ DBHelpers.insert_travel_time_data(Requests.get_travel_time_data(nil))
 DBHelpers.insert_roadwork_data()
 
 
+results.each do |route|
+	puts "Route ID:#{route.id}"
 
+	ratio = route.ideal_time / route.estimated_time
+
+	if(ratio > 1.1)
+		puts " Slow Route"
+	end
+	if(ratio < 0.9)
+		puts " Fast Route"
+	end
+	if(ratio > 0.9 or route < 1.1)
+		puts " Normal Route"
+	end
+end
 
