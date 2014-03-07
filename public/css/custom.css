@@ -8,6 +8,7 @@ body {
   background: #2c3e50;
   color: #ecf0f1;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 p {
@@ -33,12 +34,20 @@ p {
   position: relative; 
   padding: 0;
 }
-.card .type {
+.card .type, .card .map_link {
   position: absolute; 
   right: 0; 
   bottom: 0;
   font-size: 12px;
-  padding: 0.5rem;
+  padding: 5px 10px;
+  color: #7f8c8d;
+}
+.card .map_link {
+  position: absolute; 
+  left: 0; 
+  bottom: 0;
+  font-size: 12px;
+  padding: 5px 10px;
   color: #7f8c8d;
 }
 .card h2 {
@@ -70,15 +79,21 @@ p {
   border-radius:3px;
   border: 5px none #FFF;
 }
-
 #map_btn_wrapper {
   margin-top: 150px;
   margin-left: -5px;
 }
-
 #map_btn {
   display: none;
   cursor: pointer;
+}
+
+#fs_map {
+  height: 170px;
+  border-radius:3px;
+  border: 5px solid #FFF;
+  border-top: none;
+  margin: 0 5px;
 }
 
 .leaflet-control-attribution a {
