@@ -245,7 +245,7 @@ $(function() {
               });
               var tembed = embed.replace('TRACKS', tracks.join()).replace('PREFEREDTITLE', 'Playlist');
 
-              content += '<ul>' + tembed + '</ul>';
+              content += '<ul style="padding-top: 10px;">' + tembed + '</ul>';
 
               $("#results").html(tembed);
           }
