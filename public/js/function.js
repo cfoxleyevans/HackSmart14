@@ -84,12 +84,7 @@ $(function() {
   var renderCards = function() {
     addTrafficCard();
     addWeatherCard();
-<<<<<<< HEAD
-    //addMusicCard();
-=======
     addFourSquareCard();
-    addMusicCard();
->>>>>>> FETCH_HEAD
   };
 
   var addNewCard = function(html) {
