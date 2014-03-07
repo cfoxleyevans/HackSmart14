@@ -5,9 +5,11 @@ class WonderApp < Sinatra::Base
 
     lat  = params['lat']
     long = params['long']
+    rad  = params['radius']
 
     json = {
-      'dummy' => 'text'
+      'dummy' => prediction_traffic_reports(54.046575001475865, -2.800739901722409, 10),
+      'rw' => number_of_road_works(54.046575001475865, -2.800739901722409, 10)
     };
 
     json.to_json

@@ -2,6 +2,7 @@ require 'active_support/all'
 require 'json'
 
 class WonderApp < Sinatra::Base
+  get '/mmmmusic' do
   content_type :json
 
   parameters = {
@@ -16,4 +17,5 @@ class WonderApp < Sinatra::Base
   response = http.get(uri.request_uri)
 
   response.body
+end
 end
