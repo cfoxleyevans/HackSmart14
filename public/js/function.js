@@ -79,6 +79,8 @@ $(function() {
       'Theater': 'smile-o'
     }
 
+      var markerLayers = [];
+
     $.each(markers, function(index, value) {
       var color = colors[Math.floor(Math.random() * colors.length)];
 
@@ -90,9 +92,15 @@ $(function() {
 
       var marker = L.marker(value.points, {icon: redMarker}, { 
         bounceOnAdd: true
-      }).addTo(fs_map);
+      });
       marker.bindPopup(value.text);
-    });
+
+        markerLayers.push(marker);
+      });
+
+      var markerLayerGroup = new L.FeatureGroup(markerLayers);
+      markerLayerGroup.addTo(fs_map);
+      fs_map.fitBounds(markerLayerGroup.getBounds());
   };
 
   getLocation();

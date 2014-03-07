@@ -34,7 +34,9 @@ module Helpers
 
     ratio_sum = 0
     reports.each do |report|
-      ratio_sum += report.ideal_time.to_f / report.estimated_time.to_f
+      if report.estimated_time > 0
+        ratio_sum += report.ideal_time.to_f / report.estimated_time.to_f
+      end
     end
 
     ratio_sum.to_f / reports.length
