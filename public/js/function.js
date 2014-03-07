@@ -16,8 +16,8 @@ $(function() {
 
   // Use GoogleMaps API to get nearest address for lat/long
   var getAddress = function(position) {
-    lat =position.coords.latitude;
-    lon =position.coords.longitude;
+    lat = 51.7504163 //position.coords.latitude;
+    lon = -1.2475878//position.coords.longitude;
 
     initLeafletMap(lat, lon);
 
@@ -158,7 +158,11 @@ $(function() {
       if(data[0] && data[0] > 0) {
           addMusicCard(data[0].ratio);
       } else {
-          addMusicCard(1);
+          setTimeout(function() {
+            addMusicCard(1);
+          } 
+           ,500);
+          
       }
 
       for(var i = 0; i < data.length; i++) {
@@ -182,8 +186,9 @@ $(function() {
       content += '</ul><span class="type">Traffic</span></div></div>';
 
       addNewCard(content);
+      addRoadWorksCard();
     });
-    addRoadWorksCard();
+    
   };
 
   var addWeatherCard = function() {
