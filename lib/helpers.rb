@@ -54,7 +54,7 @@ module Helpers
     precib_int  = json['currently']['precipIntensity']
     wind_speed  = json['currently']['windSpeed'].to_f / 100
 
-    (precip_prob + precib_int + wind_speed).to_f / 3
+    ((precip_prob + precib_int + wind_speed).to_f / 3) * 2
   end
 
   def form_prediction_desc n

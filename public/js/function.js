@@ -67,8 +67,28 @@ $(function() {
     var fs_map = L.map('fs_map').setView([lat, lon], 14);
     L.mapbox.tileLayer('alexnorton.h2hfjmmo', {detectRetina: true}).addTo(fs_map);
 
+    var colors = ['red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpuple', 'cadetblue'];
+
+    var icon_lookup = {
+      'Pub': 'beer',
+      'Plaza': 'leaf',
+      'Café': 'coffee',
+      'Fast Food': 'cutlery',
+      'Grocery Store': 'shopping-cart',
+      'Performing Arts': 'pencil',
+      'Theater': 'smile-o'
+    }
+
     $.each(markers, function(index, value) {
-      var marker = L.marker(value.points, { 
+      var color = colors[Math.floor(Math.random() * colors.length)];
+
+      var redMarker = L.AwesomeMarkers.icon({
+        icon: icon_lookup[value.icon],
+        prefix: 'fa',
+        markerColor: color
+      });
+
+      var marker = L.marker(value.points, {icon: redMarker}, { 
         bounceOnAdd: true
       }).addTo(fs_map);
       marker.bindPopup(value.text);
@@ -108,7 +128,9 @@ $(function() {
         var points = [places[i].venue.location.lat, places[i].venue.location.lng];
         markers.push({
           'points': points,
-          'text' : places[i].venue.name})
+          'text' : places[i].venue.name,
+          'icon': places[i].venue.categories[0].shortName
+        })
       }
 
       content += '</ul><span class="type">Places Nearby</span></div>';
