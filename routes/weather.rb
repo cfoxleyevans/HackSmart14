@@ -27,6 +27,14 @@ class WonderApp < Sinatra::Base
 
 		data = JSON.parse(response.body)
 
-    data['minutely'].to_json
+  	response = {
+    	:current_summary => data['currently']['summary'],
+    	:current_temp => data['currently']['temperature'],
+    	:currently_feels_like => data['currently']['apparentTemperature'],
+    	:curent_icon => data['currently']['icon'],
+    	:next_summary => data['hourly']['data'][1]['summary'],
+    	:next_temp => data['hourly']['data'][1]['temperature']
+    }
+    response.to_json
 	end
 end
