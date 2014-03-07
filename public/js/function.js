@@ -127,8 +127,24 @@ $(function() {
       var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2><b>' + data.length + '</b> traffic reports nearby</h2><ul>'
       
       for(var i = 0; i < data.length; i++) {
-        content += '<li>' + data[i].description + '</li>';
-      };
+
+        if(data[i].severity == "clear") {
+            colour = "rgb(26, 140, 216)"; 
+        }
+        else if(data[i].severity == "normal") {
+          colour = "rgb(50, 162, 35)";
+        }
+        else if(data[i].severity == "moderate") {
+          colour = "rgb(248, 186, 55)";
+        }
+        else if(data[i].severity == "severe") {
+          colour = "rgb(241, 40, 12)";
+        }
+        
+
+
+        content += '<li style="border-left: 15px solid ' + colour + '">' + data[i].description + '</li>';
+    };
 
       content += '</ul><span class="type">Traffic</span><span class="map_link"><span class="glyphicon glyphicon-chevron-down"></span></span></div></div>';
 
