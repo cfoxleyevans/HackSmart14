@@ -16,6 +16,12 @@ p {
   font-size: 15px;
 }
 
+#logo img {
+  width: 120px;
+  margin: 0 auto;
+  display: block;
+}
+
 .box {
   padding: 1rem 1.5rem;
   background: #FFF;
@@ -107,7 +113,6 @@ p {
 .leaflet-control-attribution a {
   display: none;
 }
-
 
 .severity-sever {
   background-color: red;
