@@ -51,7 +51,7 @@ $(function() {
 
   // Create Leaflet Map centered at user's location
   var initLeafletMap = function(lat, lon) {
-    map = L.map('map').setView([lat, lon], 14);
+    map = L.map('map', {scrollWheelZoom: false}).setView([lat, lon], 14);
 
     L.mapbox.tileLayer('alexnorton.h2hfjmmo', {detectRetina: true}).addTo(map);
 
@@ -66,7 +66,7 @@ $(function() {
   };
 
   var initFSMap = function(markers) {
-    var fs_map = L.map('fs_map').setView([lat, lon], 14);
+    var fs_map = L.map('fs_map', {scrollWheelZoom: false}).setView([lat, lon], 14);
     L.mapbox.tileLayer('alexnorton.h2hfjmmo', {detectRetina: true}).addTo(fs_map);
 
     var colors = ['red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpuple', 'cadetblue'];
