@@ -11,7 +11,6 @@ module Helpers
 
     Roadwork.find_by_sql("SELECT * FROM `roadworks` WHERE MBRContains(GeomFromText('POLYGON((#{bounding_box_coords[:top_right][1]} #{bounding_box_coords[:top_right][0]}, #{bounding_box_coords[:top_left][1]} #{bounding_box_coords[:top_left][0]}, #{bounding_box_coords[:bottom_left][1]} #{bounding_box_coords[:bottom_left][0]}, #{bounding_box_coords[:bottom_right][1]} #{bounding_box_coords[:bottom_right][0]}, #{bounding_box_coords[:top_right][1]} #{bounding_box_coords[:top_right][0]}))'),
       POINT(point)) and id in (select max(id) from roadworks group by point);")
-  end
 
   def prediction_traffic_reports lat, long, radius
     bounding_box_coords = GeoHelpers.get_bounding_coords(lat, long, radius)

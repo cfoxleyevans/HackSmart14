@@ -6,9 +6,10 @@ class WonderApp < Sinatra::Base
   get '/music/playlist.json' do
     content_type :json
 
-
     parameters = {
-        target_tempo: 250
+        target_tempo: (params['speed'].to_i * 180) + 60,
+        target_energy: params['energy'],
+        target_danceability: params['danceability']
     }
 
     url = "http://developer.echonest.com/api/v4/playlist/static?api_key=IOEKRKJN4SQVXE4LO&format=json&results=20&type=genre-radio&genre=pop&genre=rock&genre=electronic&genre=indie+rock&bucket=id:spotify-WW&bucket=tracks&#{parameters.to_query}"
@@ -20,6 +21,10 @@ class WonderApp < Sinatra::Base
     response = http.get(uri.request_uri)
 
     response.body
+  end
+
+  get '/music/playlist' do
+    erb :playlist
   end
 
 end
