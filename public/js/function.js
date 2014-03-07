@@ -64,7 +64,7 @@ $(function() {
   };
 
   var initFSMap = function(markers) {
-    var fs_map = L.map('fs_map').setView([lat, lon], 14);
+    var fs_map = L.map('fs-map').setView([lat, lon], 14);
     L.mapbox.tileLayer('alexnorton.h2hfjmmo', {detectRetina: true}).addTo(fs_map);
 
     $.each(markers, function(index, value) {
@@ -83,6 +83,7 @@ $(function() {
   var renderCards = function() {
     addFourSquareCard();
     addTrafficCard();
+    addWeatherCard();
   };
 
   var addNewCard = function(html) {
@@ -114,7 +115,7 @@ $(function() {
 
       content += '</ul><span class="type">Places Nearby</span><span class="map_link"><span class="glyphicon glyphicon-chevron-down"></span></span></div>';
 
-      content += '<div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10"><div id="fs_map"></div></div></div>';
+      content += '<div id="fs-map-toggle" class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10"><div id="fs-map"></div></div></div>';
 
       addNewCard(content);
       initFSMap(markers);
@@ -152,6 +153,21 @@ $(function() {
     });
   };
 
+  var addWeatherCard = function() {
+    var url = 'weather/nearby_weather?lat=' + lat + '&long=' + lon
+    $.getJSON(url, function(data) {
+      var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2><b></b> Local weather</h2><ul>'
+      
+      
+      content += '<li>Now: ' + data.current_summary + ' - ' + data.current_temp + ', feels like ' + data.currently_feels_like + '</li>'; 
+      content += '<li>Later: ' + data.next_summary + ' - ' + data.next_temp + '</li>';
+      
+      content += '</ul><span class="type">Weather</span><span class="map_link"><span class="glyphicon glyphicon-chevron-down"></span></span></div></div>';
+
+      addNewCard(content);
+    });
+  };
+
   /********
   LISTENERS
   ********/
@@ -173,5 +189,9 @@ $(function() {
       $('#map_btn').removeClass('glyphicon-chevron-down');
       map.invalidateSize();
     }
+  });
+
+  $('#fs-map-toggle').click(function() {
+    console.log("click");
   });
 });
