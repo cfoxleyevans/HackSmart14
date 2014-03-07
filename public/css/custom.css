@@ -112,3 +112,11 @@ p {
   width: 10px;
   height: 10px;
 }
+
+.music-card iframe {
+    width: 100%;
+    height: 350px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}

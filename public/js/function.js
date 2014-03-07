@@ -84,6 +84,7 @@ $(function() {
     addFourSquareCard();
     addTrafficCard();
     addWeatherCard();
+    addMusicCard();
   };
 
   var addNewCard = function(html) {
@@ -167,6 +168,37 @@ $(function() {
       addNewCard(content);
     });
   };
+
+  var addMusicCard = function() {
+      var embed = '<iframe src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:TRACKS" frameborder="0" allowtransparency="true"></iframe>';
+
+      $.getJSON('/music/playlist.json', {
+          speed: 1,
+          energy: 1,
+          danceability: 1
+      }, function(data) {
+
+          var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card music-card"><h2>Spotify playlist</h2>';
+
+          if ('songs' in data.response) {
+              var tracks = []
+              data.response.songs.forEach(function(song) {
+                  if(song.tracks.length > 0) {
+                      tracks.push(song.tracks[0].foreign_id.replace('spotify-WW:track:', ''));
+                  }
+              });
+              var tembed = embed.replace('TRACKS', tracks.join()).replace('PREFEREDTITLE', 'Playlist');
+
+              content += tembed;
+
+              $("#results").html(tembed);
+          }
+
+          content += '<span class="type">Music</span></div>';
+
+          addNewCard(content);
+      });
+  }
 
   /********
   LISTENERS
