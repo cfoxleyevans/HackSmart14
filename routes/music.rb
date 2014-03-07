@@ -12,7 +12,7 @@ class WonderApp < Sinatra::Base
         target_danceability: params['danceability']
     }
 
-    url = "http://developer.echonest.com/api/v4/playlist/static?api_key=IOEKRKJN4SQVXE4LO&format=json&results=5&type=genre-radio&genre=pop&genre=rock&genre=electronic&genre=indie+rock&bucket=id:spotify-WW&bucket=tracks&#{parameters.to_query}"
+    url = "http://developer.echonest.com/api/v4/playlist/static?api_key=IOEKRKJN4SQVXE4LO&format=json&results=7&type=genre-radio&genre=pop&genre=rock&genre=electronic&genre=indie+rock&bucket=id:spotify-WW&bucket=tracks&#{parameters.to_query}"
 
     uri =  URI.parse(url)
 
