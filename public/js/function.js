@@ -84,7 +84,7 @@ $(function() {
     addFourSquareCard();
     addTrafficCard();
     addWeatherCard();
-    addMusicCard();
+    //addMusicCard();
   };
 
   var addNewCard = function(html) {
@@ -127,7 +127,13 @@ $(function() {
     var url = '/journey_times/nerarby_routes?lat=' + lat + '&long=' + lon + '&radius=10'
     $.getJSON(url, function(data) {
       var content = '<div class="row" id="card"><div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 card"><h2><b>' + data.length + '</b> traffic reports nearby</h2><ul>'
-      
+
+      if(data[0] && data[0] > 0) {
+          addMusicCard(data[0].ratio);
+      } else {
+          addMusicCard(1);
+      }
+
       for(var i = 0; i < data.length; i++) {
 
         if(data[i].severity == "clear") {
@@ -167,12 +173,16 @@ $(function() {
     });
   };
 
-  var addMusicCard = function() {
+  var addMusicCard = function(severity) {
       var embed = '<iframe src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:TRACKS" frameborder="0" allowtransparency="true"></iframe>';
 
+      console.log(severity);
+      var value = ((severity - 1) * 5) + 0.5;
+      console.log(value);
+
       $.getJSON('/music/playlist.json', {
-          speed: 1,
-          energy: 1,
+          speed: value,
+          energy: value,
           danceability: 1
       }, function(data) {
 
