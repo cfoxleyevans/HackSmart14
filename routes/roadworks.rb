@@ -17,6 +17,14 @@ class WonderApp < Sinatra::Base
     result.to_json
   end
 
+  get '/roadworks/neraby_roadworks' do
+    content_type :json
+
+    result = DBHelpers.get_contained_roadwork_data(params[:lat], params[:long], params[:radius])
+
+    result.to_json
+  end
+
   get '/roadworks' do
     erb :roadworks
   end
