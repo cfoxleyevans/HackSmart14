@@ -1,4 +1,6 @@
-![Logo](https://raw.github.com/cfoxleyevans/HackSmart14/master/public/images/logo.png)
+<p align="center">
+	<img src="https://raw.github.com/cfoxleyevans/HackSmart14/master/public/images/logo.png"/>
+</p>
 
 # Roadie
 
@@ -38,4 +40,7 @@ Roadie is road transport dashboard, designed to aid decision making by providing
 - [Chris Foxley-Evans](https://github.com/cfoxleyevans)
 
 ### Screenshot
-![Screenshot](https://raw.github.com/cfoxleyevans/HackSmart14/master/screenshot.png)
+
+<p align="center">
+	<img src="https://raw.github.com/cfoxleyevans/HackSmart14/master/screenshot.png"/>
+</p>
