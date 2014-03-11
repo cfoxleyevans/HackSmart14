@@ -6,7 +6,7 @@
 
 This is Roadie, Team Syn-Energy's entry to [Hack Smart Streets 2014](https://www.eventbrite.co.uk/e/hack-smart-streets-2014-tickets-10537266247).
 
-Roadie is road transport dashboard, designed to aid decision making by providing contextually relevant transport information, presented using a card based interface.
+Roadie is a road transport dashboard, designed to aid decision making by providing contextually relevant transport information, presented using a card based interface.
 
 ### Cards
 - map of the user's current location
